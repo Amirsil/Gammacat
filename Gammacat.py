@@ -2,10 +2,6 @@ import sys
 import webbrowser
 import subprocess
 import os
-import socket
-
-
-## ip = socket.gethostbyname(socket.gethostname())
 
 
 def main():
@@ -22,16 +18,67 @@ There is NO WARRANTY, to the extent permitted by law.
 Written by Torbjorn Granlund and Richard M. Stallman.
 ''')
         elif sys.argv[1] in ['-d', '--daemon']:
-            if open('daemon.txt', 'r').read():
-                print('A daemon is already running in the background')
+            if os.path.isfile('daemon.txt'):
+                print('''
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+A daemon is already running in the background
+''')
             else:
-                print('Starting daemon...')
+                print('''
+                
+                
+               
+               
+               
+               
+               
+               
+                
+               
+Starting daemon...
+''')
                 subprocess.call("daemon.sh", shell=True)
 
         elif sys.argv[1] in ['-k', '--kill-daemon']:
-            print('Stopping daemon...')
+            if not os.path.isfile('daemon.txt'):
+                print('''
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+No daemon is currently running
+''')
+            else:
+                print('''
+                
+         
+         
+         
+         
+         
+         
+                
+                
+                
+Stopping daemon...
+''')
 
-            subprocess.call("killdaemon.sh", shell=True)
+                subprocess.call("killdaemon.sh", shell=True)
 
         elif sys.argv[1] in ['-s', '--server']:
             subprocess.call("server.sh", shell=True)
@@ -75,8 +122,8 @@ Software sollution for file search.
         -s, --server        open the gammacat web server on your local host
         -c, --connect       connect to the server as a storage node
         -e, --search        connect to the server as a client
-        -d, --daemon        start a daemon that appends every file on your                                   computer to a local database
-        -k, --kill-daemon   stops the daemon that appends files from your                                   computer to a local database
+        -d, --daemon        start a daemon that appends every file on your                                                                          computer to a local database
+        -k, --kill-daemon   stops the daemon that appends files from your                                                                           computer to a local database
         --version           output version information and exits
                             ''')
 

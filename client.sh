@@ -1,4 +1,5 @@
 #!/bin/bash
+touch db.txt
 pip install flask
 pip install requests
 python Client.py
