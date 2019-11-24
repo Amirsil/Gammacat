@@ -1,0 +1,3 @@
+#!/bin/bash
+python Gammacat.py $1 $2
+touch daemon.txt
