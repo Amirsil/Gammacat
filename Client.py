@@ -35,9 +35,10 @@ def home():
         jdb = open(DB_NAME, 'r').read()
 
     if jdb and json.loads(jdb):
+        print(jdb)
         db = json.loads(jdb)
     else:
-        db = []
+        return json.dumps([])
     pass
 
     paths = []
@@ -62,10 +63,11 @@ def shutdown():
 
 
 def main():
-    if len(sys.argv) > 1:
-        server_ip = sys.argv[1]
-    else:
-        server_ip = 'localhost'
+    if not os.path.isfile('db.txt'):
+        f = open('db.txt', 'w+')
+        f.write(json.dumps([]))
+        f.close()
+    server_ip = sys.argv[1]
     print('''
     
     
@@ -93,7 +95,7 @@ def main():
 ''')
     while True:
         try:
-            requests.post("http://%s:5555/handle_new_connections" % server_ip, data={"ip": get_ip()}, timeout=0.1)
+            requests.post("http://%s:5555/handle_new_connections" % server_ip, data={"ip": get_ip()})
         except requests.exceptions.ConnectionError:
             continue
         break

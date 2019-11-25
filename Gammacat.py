@@ -79,7 +79,7 @@ usage: gammacat [OPTION] [HOST] ''')
         elif len(sys.argv) == 3:
 
             if sys.argv[1] in ['-c', '--connect']:
-                subprocess.call("client.sh", shell=True)
+                subprocess.call(["client.sh", sys.argv[2]], shell=True)
 
             elif sys.argv[1] in ['-e', '--search']:
                 webbrowser.open_new_tab('http://%s:5555' % sys.argv[2])

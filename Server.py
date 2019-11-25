@@ -45,9 +45,9 @@ def handle_request():
                     paths += json.loads(r.text)
             except:
                 ip_list.remove(ip)
-
-        filenames = [re.search(r'([^\\]+$)', path).group() for path, ip in paths]
         print(paths)
+        filenames = [re.search(r'([^\\]+$)', path).group() for path, ip in paths]
+
         return render_template('home.html', title='Home', paths=paths, filenames=filenames)
     return render_template('home.html', title='Home')
 
