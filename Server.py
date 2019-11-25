@@ -25,39 +25,40 @@ def handle_new_connections():
     ip = req['ip']
     if ip not in ip_list:
         ip_list.append(ip)
-        # keep_alive[ip] = time.time()
-    return 'Connection with the server was established'
+    return ''
 
 
 @app.route('/handle_request', methods=['POST'])
 def handle_request():
-    paths = []
-    req = request.form
-    if 'filename' not in req.keys():
-        return render_template('home.html', title='Home')
-    filename = req['filename']
-    for ip in ip_list:
-        ip = my_ip  # for local connection, remove when actually used
-        try:
-            r = requests.post("http://%s:5000" % ip, data={"filename": filename}, timeout=10)
-        except:
-            ip_list.remove(ip)
-            continue
+    print(ip_list)
+    if ip_list:
+        paths = []
+        req = request.form
+        if 'filename' not in req.keys():
+            return render_template('home.html', title='Home')
+        filename = req['filename']
+        for ip in ip_list:
+            try:
+                r = requests.post("http://%s:5000" % ip, data={"filename": filename})
+                r = r  # an operation on r must be done for some reason, else an exception occures.
+                if r.text:
+                    paths += json.loads(r.text)
+            except:
+                ip_list.remove(ip)
 
-        paths += json.loads(r.text)
-    filenames = [re.search(r'([^\\]+$)', path).group() for path, ip in paths]
-    return render_template('home.html', title='Home', paths=paths, filenames=filenames)
-
-
-# @app.route('/keep_alive', methods=['POST'])
-# def keep_alive():
-#     req = request.form
-#     if 'ip' not in req.keys():
-#         return ''
-#     ip = req['ip']
-#     keep_alive[ip] = time.time()
+        filenames = [re.search(r'([^\\]+$)', path).group() for path, ip in paths]
+        print(paths)
+        return render_template('home.html', title='Home', paths=paths, filenames=filenames)
+    return render_template('home.html', title='Home')
 
 
+@app.route('/shutdown', methods=['POST'])
+def shutdown():
+    func = request.environ.get('werkzeug.server.shutdown')
+    if func is None:
+        raise RuntimeError('Not running with the Werkzeug Server')
+    func()
+    return 'Server shutting down...'
 
 
 if __name__ == "__main__":

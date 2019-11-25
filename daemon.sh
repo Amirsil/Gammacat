@@ -1,3 +1,4 @@
 #!/bin/bash
 touch db.txt
-python3 daemon.py&
+touch daemon.txt
+python daemon.py&
