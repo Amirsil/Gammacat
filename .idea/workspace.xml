@@ -2,16 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0be0de9b-b182-442d-ae62-60883fe71db7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/amir.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Gammacat.py" beforeDir="false" afterPath="$PROJECT_DIR$/Gammacat.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server.py" beforeDir="false" afterPath="$PROJECT_DIR$/Server.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client.sh" beforeDir="false" afterPath="$PROJECT_DIR$/client.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/daemon.py" beforeDir="false" afterPath="$PROJECT_DIR$/daemon.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/daemon.sh" beforeDir="false" afterPath="$PROJECT_DIR$/daemon.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/daemon.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gammacat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gammacat.bat" beforeDir="false" afterPath="$PROJECT_DIR$/gammacat.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/killdaemon.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/killdaemon.sh" beforeDir="false" afterPath="$PROJECT_DIR$/killdaemon.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.txt" beforeDir="false" afterPath="$PROJECT_DIR$/db.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server.sh" beforeDir="false" afterPath="$PROJECT_DIR$/server.sh" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,6 +32,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
@@ -50,7 +48,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.daemon">
+  <component name="RunManager" selected="Python.Client">
     <configuration name="Client" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Cyber" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -165,11 +163,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Client" />
+        <item itemvalue="Python.Server" />
         <item itemvalue="Python.daemon" />
         <item itemvalue="Python.Connect" />
         <item itemvalue="Python.deamon" />
-        <item itemvalue="Python.Client" />
-        <item itemvalue="Python.Server" />
       </list>
     </recent_temporary>
   </component>
