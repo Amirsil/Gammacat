@@ -36,7 +36,7 @@ Stopping daemon... ''')
                 subprocess.call("killdaemon.sh", shell=True)
 
         elif sys.argv[1] in ['-s', '--server']:
-            subprocess.call("server.sh", shell=True)
+            subprocess.call("server.bat")
 
         elif sys.argv[1] in ['-cs', '--close-server']:
             subprocess.call("killserver.sh", shell=True)
@@ -79,7 +79,7 @@ usage: gammacat [OPTION] [HOST] ''')
         elif len(sys.argv) == 3:
 
             if sys.argv[1] in ['-c', '--connect']:
-                subprocess.call(["client.sh", sys.argv[2]], shell=True)
+                subprocess.call(["client.bat", sys.argv[2]])
 
             elif sys.argv[1] in ['-e', '--search']:
                 webbrowser.open_new_tab('http://%s:5555' % sys.argv[2])

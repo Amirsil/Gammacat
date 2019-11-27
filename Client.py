@@ -7,7 +7,6 @@ import re
 import sys
 import webbrowser
 
-
 app = Flask(__name__)
 DB_NAME = 'db.txt'
 

@@ -30,7 +30,6 @@ def handle_new_connections():
 
 @app.route('/handle_request', methods=['POST'])
 def handle_request():
-    print(ip_list)
     if ip_list:
         paths = []
         req = request.form
@@ -45,7 +44,7 @@ def handle_request():
                     paths += json.loads(r.text)
             except:
                 ip_list.remove(ip)
-        print(paths)
+        print('Connected storage nodes:\n%s' % '%s\n' % ''.join([ip for ip in ip_list]))
         filenames = [re.search(r'([^\\]+$)', path).group() for path, ip in paths]
 
         return render_template('home.html', title='Home', paths=paths, filenames=filenames)

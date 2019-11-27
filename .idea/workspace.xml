@@ -2,10 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="05b1202e-a209-4666-91db-8b8c64048dec" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Gammacat.py" beforeDir="false" afterPath="$PROJECT_DIR$/Gammacat.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server.py" beforeDir="false" afterPath="$PROJECT_DIR$/Server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client.sh" beforeDir="false" afterPath="$PROJECT_DIR$/client.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/daemon.sh" beforeDir="false" afterPath="$PROJECT_DIR$/daemon.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.txt" beforeDir="false" afterPath="$PROJECT_DIR$/db.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.sh" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,6 +29,7 @@
   </component>
   <component name="ProjectId" id="1U7TRGHgAIfvadCFLqHx5n2GiI3" />
   <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
@@ -85,7 +90,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
