@@ -4,9 +4,8 @@
     <list default="true" id="05b1202e-a209-4666-91db-8b8c64048dec" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gammacat.py" beforeDir="false" afterPath="$PROJECT_DIR$/Gammacat.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/daemon.py" beforeDir="false" afterPath="$PROJECT_DIR$/daemon.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/daemon.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server.py" beforeDir="false" afterPath="$PROJECT_DIR$/Server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client.bat" beforeDir="false" afterPath="$PROJECT_DIR$/client.bat" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

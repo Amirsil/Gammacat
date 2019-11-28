@@ -34,7 +34,6 @@ def home():
         jdb = open(DB_NAME, 'r').read()
 
     if jdb and json.loads(jdb):
-        print(jdb)
         db = json.loads(jdb)
     else:
         return json.dumps([])
@@ -94,7 +93,8 @@ Connecting to server...
 ''')
     while True:
         try:
-            requests.post("http://%s:5555/handle_new_connections" % server_ip, data={"ip": get_ip()})
+            r = requests.post("http://%s:5555/handle_new_connections" % server_ip, data={"ip": get_ip()})
+            r = r
         except requests.exceptions.ConnectionError:
             continue
         break
