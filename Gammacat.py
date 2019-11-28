@@ -23,7 +23,7 @@ A daemon is already running in the background ''')
             else:
                 print('''    
 Starting daemon... ''')
-                subprocess.call("daemon.sh", shell=True)
+                subprocess.call("daemon.bat")
 
         elif sys.argv[1] in ['-k', '--kill-daemon']:
             if not os.path.isfile('daemon.txt'):

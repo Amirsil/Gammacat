@@ -6,14 +6,23 @@ DB_NAME = 'db.txt'
 
 
 def main():
+    if not os.path.isfile('db.txt'):
+        f = open('db.txt', 'w+')
+        f.write(json.dumps([]))
+        f.close()
     _break = 0
-    print('Uploading files to local database')
+    print('''
+Close this daemon only from the command line using the -k option ''')
     while 1:
         if _break:
             break
 
         paths = []
-        jdb = open(DB_NAME, 'r').read()
+        try:
+            jdb = open(DB_NAME, 'r').read()
+        except:
+            jdb = json.dumps([])
+            main()
         if jdb and json.loads(jdb):
             db = json.loads(jdb)
         else:

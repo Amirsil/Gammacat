@@ -90,7 +90,7 @@ def main():
     
     
     
-
+Connecting to server...
 ''')
     while True:
         try:
