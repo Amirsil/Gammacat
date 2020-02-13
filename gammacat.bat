@@ -1,1 +1,1 @@
-Gammacat.py %1 %2
+python Gammacat.py %1 %2
