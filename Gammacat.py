@@ -33,7 +33,7 @@ No daemon is currently running ''')
                 print('''          
 Stopping daemon... ''')
 
-                subprocess.call("killdaemon.sh", shell=True)
+                subprocess.call("killdaemon.bat")
 
         elif sys.argv[1] in ['-s', '--server']:
             subprocess.call("server.bat")

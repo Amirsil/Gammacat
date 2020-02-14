@@ -1,3 +1,3 @@
-chmod +w daemon.txt
 type nul > daemon.txt
+type nul > db.txt
 python daemon.py

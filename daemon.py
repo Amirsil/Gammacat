@@ -31,7 +31,7 @@ Close this daemon only from the command line using the -k option ''')
         for root, directories, filenames in os.walk('\\'):
 
             if os.path.isfile('killdaemon.txt'):
-                subprocess.call("del-killdaemon.sh", shell=True)
+                subprocess.call("del-killdaemon.bat")
                 time.sleep(0.1)
                 _break = 1
 
@@ -54,7 +54,7 @@ Close this daemon only from the command line using the -k option ''')
 
         while len(db) != len(paths):
             if os.path.isfile('killdaemon.txt'):
-                subprocess.call("del-killdaemon.sh", shell=True)
+                subprocess.call("del-killdaemon.bat")
                 time.sleep(0.1)
                 _break = 1
                 break
