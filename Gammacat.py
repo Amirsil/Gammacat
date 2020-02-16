@@ -92,9 +92,8 @@ A server is already active
 
             elif argv[1] in ['-e', '--search']:
                 try:
-                    r = requests.post("http://%s:5555" % argv[2])
-                    if r:
-                        webbrowser.open_new_tab('http://%s:5555' % argv[2])
+                    requests.post("http://%s:5555" % argv[2])
+                    webbrowser.open_new_tab('http://%s:5555' % argv[2])
                 except requests.exceptions.ConnectionError:
                     print('''
 No server is active on this host                    
