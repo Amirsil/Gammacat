@@ -1,13 +1,14 @@
-import sys
+from sys import argv
 import webbrowser
 import subprocess
 import os
+import requests
 
 
 def main():
-    if len(sys.argv) > 1:
+    if len(argv) > 1:
 
-        if sys.argv[1] == '--version':
+        if argv[1] == '--version':
             print('''
 gammacat (GNU coreutils) 1.0
 Copyright (C) 2019 Free Software Foundation, Inc.
@@ -16,7 +17,7 @@ This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
 
 Written by Torbjorn Granlund and Richard M. Stallman. ''')
-        elif sys.argv[1] in ['-d', '--daemon']:
+        elif argv[1] in ['-d', '--daemon']:
             if os.path.isfile('daemon.txt'):
                 print('''    
 A daemon is already running in the background ''')
@@ -25,7 +26,7 @@ A daemon is already running in the background ''')
 Starting daemon... ''')
                 subprocess.call("daemon.bat")
 
-        elif sys.argv[1] in ['-k', '--kill-daemon']:
+        elif argv[1] in ['-k', '--kill-daemon']:
             if not os.path.isfile('daemon.txt'):
                 print('''             
 No daemon is currently running ''')
@@ -35,54 +36,69 @@ Stopping daemon... ''')
 
                 subprocess.call("killdaemon.bat")
 
-        elif sys.argv[1] in ['-s', '--server']:
-            subprocess.call("server.bat")
+        elif argv[1] in ['-s', '--server']:
+            try:
+                r = requests.post("http://localhost:5555")
+                if r:
+                    print('''
+A node is already active
+''')
+            except requests.exceptions.ConnectionError:
+                subprocess.call("server.bat")
 
-        elif sys.argv[1] in ['-cs', '--close-server']:
-            subprocess.call("killserver.sh", shell=True)
-            while not os.path.isfile('deadserver'):
-                pass
-            if open('deadserver', 'r').read() == '\n':
-                print('''                                       
-No server is active on your computer right now ''')
-            else:
-                print(''' 
-Server shutting down... ''')
-            os.remove('deadserver')
+        elif len(argv) == 2:
 
-        elif sys.argv[1] in ['-cn', '--close-node']:
-            subprocess.call("killclient.sh", shell=True)
-            while not os.path.isfile('deadclient'):
-                pass
-            if open('deadclient', 'r').read() == '\n':
-                print('''                                       
-No node is active on your computer right now ''')
-            else:
-                print(''' 
-Node shutting down... ''')
-            os.remove('deadclient')
-
-        elif len(sys.argv) == 2:
-
-            if sys.argv[1] in ['-c', '--connect']:
+            if argv[1] in ['-c', '--connect']:
                 print('''
 usage: gammacat [-c, --connect] [HOST] ''')
 
-            elif sys.argv[1] in ['-e', '--search']:
+            elif argv[1] in ['-e', '--search']:
                 print('''
 usage: gammacat [-e, --search] [HOST] ''')
 
+            elif argv[1] in ['-cs', '--close-server']:
+                try:
+                    r = requests.post("http://localhost:5555/shutdown")
+                    print(r.text)
+
+                except requests.exceptions.ConnectionError:
+                    print('''                                       
+No server is active on your computer right now ''')
+
+            elif argv[1] in ['-cn', '--close-node']:
+                try:
+                    r = requests.post("http://localhost:5550/shutdown")
+                    print(r.text)
+
+                except requests.exceptions.ConnectionError:
+                    print('''                                       
+No node is active on your computer right now ''')
+            
             else:
                 print('''
 usage: gammacat [OPTION] [HOST] ''')
 
-        elif len(sys.argv) == 3:
+        elif len(argv) == 3:
 
-            if sys.argv[1] in ['-c', '--connect']:
-                subprocess.call(["client.bat", sys.argv[2]])
+            if argv[1] in ['-c', '--connect']:
+                try:
+                    r = requests.post("http://localhost:5550")
+                    if r:
+                        print('''
+A server is already active
+''')
+                except requests.exceptions.ConnectionError:
+                    subprocess.call(["client.bat", argv[2]])
 
-            elif sys.argv[1] in ['-e', '--search']:
-                webbrowser.open_new_tab('http://%s:5555' % sys.argv[2])
+            elif argv[1] in ['-e', '--search']:
+                try:
+                    r = requests.post("http://%s:5555" % argv[2])
+                    if r:
+                        webbrowser.open_new_tab('http://%s:5555' % argv[2])
+                except requests.exceptions.ConnectionError:
+                    print('''
+No server is active on this host                    
+''')
 
             else:
                 print('''
