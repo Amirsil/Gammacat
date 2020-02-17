@@ -57,7 +57,7 @@ def shutdown():
     if func is None:
         raise RuntimeError('Not running with the Werkzeug Server')
     func()
-    return 'Node shutting down...'
+    return '\nNode shutting down...'
 
 
 def main():
@@ -67,30 +67,7 @@ def main():
         f.close()
     server_ip = sys.argv[1]
     print('''
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-Connecting to server...
-''')
+Connecting to server...''')
     while True:
         try:
             r = requests.post("http://%s:5555/handle_new_connections" % server_ip, data={"ip": get_ip()})

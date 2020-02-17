@@ -57,7 +57,7 @@ def shutdown():
     if func is None:
         raise RuntimeError('Not running with the Werkzeug Server')
     func()
-    return 'Server shutting down...'
+    return '\nServer shutting down...'
 
 
 if __name__ == "__main__":

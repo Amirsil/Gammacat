@@ -38,11 +38,9 @@ Stopping daemon... ''')
 
         elif argv[1] in ['-s', '--server']:
             try:
-                r = requests.post("http://localhost:5555")
-                if r:
-                    print('''
-A node is already active
-''')
+                requests.post("http://localhost:5555", timeout=0.1)
+                print('''
+A node is already active''')
             except requests.exceptions.ConnectionError:
                 subprocess.call("server.bat")
 
@@ -58,7 +56,7 @@ usage: gammacat [-e, --search] [HOST] ''')
 
             elif argv[1] in ['-cs', '--close-server']:
                 try:
-                    r = requests.post("http://localhost:5555/shutdown")
+                    r = requests.post("http://localhost:5555/shutdown", timeout=0.1)
                     print(r.text)
 
                 except requests.exceptions.ConnectionError:
@@ -67,7 +65,7 @@ No server is active on your computer right now ''')
 
             elif argv[1] in ['-cn', '--close-node']:
                 try:
-                    r = requests.post("http://localhost:5550/shutdown")
+                    r = requests.post("http://localhost:5550/shutdown", timeout=0.1)
                     print(r.text)
 
                 except requests.exceptions.ConnectionError:
@@ -82,17 +80,16 @@ usage: gammacat [OPTION] [HOST] ''')
 
             if argv[1] in ['-c', '--connect']:
                 try:
-                    r = requests.post("http://localhost:5550")
+                    r = requests.post("http://localhost:5550", timeout=0.1)
                     if r:
                         print('''
-A server is already active
-''')
+A server is already active''')
                 except requests.exceptions.ConnectionError:
                     subprocess.call(["client.bat", argv[2]])
 
             elif argv[1] in ['-e', '--search']:
                 try:
-                    requests.post("http://%s:5555" % argv[2])
+                    requests.post("http://%s:5555" % argv[2], timeout=0.1)
                     webbrowser.open_new_tab('http://%s:5555' % argv[2])
                 except requests.exceptions.ConnectionError:
                     print('''
@@ -116,7 +113,7 @@ Software sollution for file search in a network of computers all connected to 1 
         -c, --connect           connect to the server as a storage node
         -e, --search            connect to the main server from the browser to search files
         -d, --daemon            start a daemon that appends every file on your computer to a local database
-        -k, --kill-daemon       stops the daemon that appends files from your computer to a local database
+        -k, --kill-daemon       stop the daemon that appends files from your computer to a local database
         -cs, --close-server     close the gammacat web main server that is open on your host
         -cn, --close-node       close the storage node that is connected to the main server
         --version               output version information and exits ''')
