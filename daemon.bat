@@ -1,4 +1,4 @@
 start
 type nul > daemon.txt
-type nul > db.txt
+icacls db.txt /c /q 
 python daemon.py

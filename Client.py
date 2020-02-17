@@ -70,7 +70,7 @@ def main():
 Connecting to server...''')
     while True:
         try:
-            r = requests.post("http://%s:5555/handle_new_connections" % server_ip, data={"ip": get_ip()})
+            r = requests.post("http://%s:5555/handle_new_connections" % server_ip, data={"ip": get_ip()}, timeout=0.1)
             r = r
         except requests.exceptions.ConnectionError:
             continue
