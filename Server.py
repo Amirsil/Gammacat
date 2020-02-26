@@ -38,7 +38,7 @@ def handle_request():
         filename = req['filename']
         for ip in ip_list:
             try:
-                r = requests.post("http://%s:5550" % ip, data={"filename": filename}, timeout=0.1)
+                r = requests.post("http://%s:5550" % ip, data={"filename": filename})
                 r = r  # an operation on r must be done for some reason, else an exception occures.
                 if r.text:
                     paths += json.loads(r.text)
