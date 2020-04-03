@@ -28,7 +28,13 @@ Close this daemon only from the command line using the -k option ''')
         else:
             db = []
 
-        for root, directories, filenames in os.walk('\\'):
+        for root, directories, filenames in os.walk('C:/Users'):
+
+            filenames = [f for f in filenames if not f[0] == '.']
+            directories[:] = [d for d in directories if not d[0] == '.' and "AppData" not in d]
+
+            if "AppData" in directories:
+                directories.remove("AppData")
 
             if os.path.isfile('killdaemon.txt'):
                 subprocess.call("del-killdaemon.bat")
