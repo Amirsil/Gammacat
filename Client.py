@@ -6,8 +6,13 @@ from flask import Flask, render_template, url_for, request
 import re
 import sys
 import webbrowser
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = '0xdeadbeef yes'
+app.config['CORS_HEADERS'] = 'Content-Type'
+
+cors = CORS(app, resources={r"/download_file": {"origins": "*"}})
 DB_NAME = 'db.txt'
 
 
@@ -58,6 +63,15 @@ def shutdown():
         raise RuntimeError('Not running with the Werkzeug Server')
     func()
     return '\nNode shutting down...'
+
+
+@app.route('/download_file', methods=['POST'])
+@cross_origin(origin='*', headers=['Content-Type', 'Authorization'])
+def download_file():
+    req = request.form
+    print(req)
+    return ''
+
 
 
 def main():
