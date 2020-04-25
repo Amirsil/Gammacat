@@ -37,7 +37,7 @@ Written by Torbjorn Granlund and Richard M. Stallman. ''')
         elif argv[1] in ['-s', '--server']:
             try:
                 requests.post("http://localhost:5555", timeout=0.1)
-                print('\nA node is already active')
+                print('\nA server is already active')
 
             except requests.exceptions.ConnectionError:
                 subprocess.call("server.bat")
@@ -74,7 +74,7 @@ Written by Torbjorn Granlund and Richard M. Stallman. ''')
             if argv[1] in ['-c', '--connect']:
                 try:
                     requests.post("http://localhost:5550", timeout=0.1)
-                    print('\nA server is already active')
+                    print('\nA node is already active')
 
                 except requests.exceptions.ConnectionError:
                     subprocess.call(["client.bat", argv[2]])

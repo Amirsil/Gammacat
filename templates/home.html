@@ -25,7 +25,8 @@
         {% for path, ip in paths %}
                 <ul>
                     <li>
-                        <input type="button" value="{{  filenames[paths.index([path, ip])] }}" onclick='post("http://{{ip}}:5550/download_file", "{\"path\":\"{{ path }}\"}");'>
+<!--                        <input type="button" value="{{  filenames[paths.index([path, ip])] }}">-->
+                        <a href="http://{{ip}}:5550/download_file?path={{path}}"> {{  filenames[paths.index([path, ip])] }} </a>
                     </li>
                 </ul>
         {% endfor %}
@@ -41,17 +42,5 @@ function adjust_textarea(h) {
     h.style.height = (h.scrollHeight)+"px";
 }
 
-function post(url, data, callback) {
-    try {
-        var req = new(this.XMLHttpRequest || ActiveXObject)('MSXML2.XMLHTTP.3.0');
-        req.open('POST', url, 1);
-        req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        req.setRequestHeader('Access-Control-Allow-Origin', '*');
-        req.send(data);
-    }
-    catch (e) {
-        window.console && console.log(e);
-    }
-}
 </script>
 {% endblock %}

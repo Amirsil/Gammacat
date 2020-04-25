@@ -2,11 +2,12 @@ import os
 import json
 import requests
 import socket
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request, send_file
 import re
 import sys
 import webbrowser
 from flask_cors import CORS, cross_origin
+import urllib.parse
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '0xdeadbeef yes'
@@ -65,13 +66,18 @@ def shutdown():
     return '\nNode shutting down...'
 
 
-@app.route('/download_file', methods=['POST'])
+@app.route('/download_file', methods=['GET'])
 @cross_origin(origin='*', headers=['Content-Type', 'Authorization'])
 def download_file():
-    req = request.form
-    print(req)
-    return ''
-
+    req = request.args
+    if 'path' not in request.args.keys():
+        return ''
+    path = request.args['path']
+    print(path)
+    try:
+        return send_file(urllib.parse.unquote(path))
+    except PermissionError:
+        return "You don't have permission for this file!"
 
 
 def main():

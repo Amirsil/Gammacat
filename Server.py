@@ -5,7 +5,7 @@ from datetime import datetime
 import re
 import time
 import socket
-
+import urllib.parse
 app = Flask(__name__)
 ip_list = []
 my_ip = 'localhost'
@@ -41,12 +41,11 @@ def handle_request():
                 r = requests.post("http://%s:5550" % ip, data={"filename": filename})
                 r = r  # an operation on r must be done for some reason, else an exception occures.
                 if r.text:
-                    paths += json.loads(r.text)
+                    paths += json.loads(r.text.replace("\\", "\\\\").replace("/", "\\\\\\\\"))
             except requests.exceptions.ConnectionError:
                 ip_list.remove(ip)
         print('Connected storage nodes:\n%s' % '%s\n' % ''.join([ip for ip in ip_list]))
         filenames = [re.search(r'([^\\]+$)', path).group() for path, ip in paths]
-
         return render_template('home.html', title='Home', paths=paths, filenames=filenames)
     return render_template('home.html', title='Home')
 
