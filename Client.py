@@ -75,7 +75,7 @@ def download_file():
     path = request.args['path']
     print(path)
     try:
-        return send_file(urllib.parse.unquote(path))
+        return send_file(urllib.parse.unquote(path), as_attachment=True)
     except PermissionError:
         return "You don't have permission for this file!"
 
