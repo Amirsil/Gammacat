@@ -66,7 +66,7 @@ def shutdown():
     return '\nNode shutting down...'
 
 
-@app.route('/download_file', methods=['GET'])
+@app.route('/download_file', methods=['GET', 'POST'])
 @cross_origin(origin='*', headers=['Content-Type', 'Authorization'])
 def download_file():
     req = request.args
