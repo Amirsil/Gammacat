@@ -12,7 +12,7 @@
 <form class="form-style-7" action="{{ url_for('handle_request') }}" method="post">
 <ul>
 <li>
-    <input type="text" name="filename" maxlength="100">
+    <input type="text" name="filename" maxlength="100" width="600">
     <span>Enter Filename</span>
 </li>
 
@@ -20,20 +20,19 @@
     <input type="submit" value="Search for file">
 </li>
 </ul>
+</form>
 
-    {% if paths %}
+<ul>
+{% if paths %}
         {% for path, ip in paths %}
-                <ul>
+                <span class="square">
                     <li>
-<!--                        <input type="button" value="{{  filenames[paths.index([path, ip])] }}">-->
-                        <a href="http://{{ip}}:5550/download_file?path={{path}}"> {{  filenames[paths.index([path, ip])] }} </a>
+                            <a href="http://{{ip}}:5550/download_file?path={{path}}"> {{  filenames[paths.index([path, ip])] }} </a>
                     </li>
-                </ul>
+                </span>
         {% endfor %}
     {% endif %}
-
-
-</form>
+</ul>
 
 <script type="text/javascript">
 //auto expand textarea

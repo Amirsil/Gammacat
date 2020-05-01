@@ -110,3 +110,22 @@
 	background: #6B9FFF;
 	color:#fff;
 }
+.square a{
+  position:static;
+  padding:0.2em 0.4em;
+  color: #0060B6;
+  text-align: center;
+  font-size: 150%;
+}
+.square a:hover{
+  color:#00A0C6;
+  cursor:pointer;
+  text-decoration: none;
+}
+ul {
+  list-style-type: none;
+  text-align: center;
+ }
+.square li{
+margin-bottom: 10px;
+}
