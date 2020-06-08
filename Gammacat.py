@@ -77,7 +77,7 @@ Written by Torbjorn Granlund and Richard M. Stallman. ''')
                     print('\nA node is already active')
 
                 except requests.exceptions.ConnectionError:
-                    subprocess.call(["client.bat", argv[2]])
+                    subprocess.call(["node.bat", argv[2]])
 
             elif argv[1] in ['-e', '--search']:
                 try:

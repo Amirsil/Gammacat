@@ -5,14 +5,8 @@ import subprocess
 DB_NAME = 'db.txt'
 
 
-def main():
-    if not os.path.isfile('db.txt'):
-        f = open('db.txt', 'w+')
-        f.write(json.dumps([]))
-        f.close()
+def update_db():
     _break = 0
-    print('''
-Close this daemon only from the command line using the -k option ''')
     try:
         while 1:
             if _break:
@@ -59,6 +53,7 @@ Close this daemon only from the command line using the -k option ''')
                     jdb = json.dumps(db)
                     open(DB_NAME, 'w').write(jdb)
 
+
             while len(db) != len(paths):
                 if os.path.isfile('killdaemon.txt'):
                     subprocess.call("del-killdaemon.bat")
@@ -77,8 +72,21 @@ Close this daemon only from the command line using the -k option ''')
                         db.remove(path)
                         jdb = json.dumps(db)
                         open(DB_NAME, 'w').write(jdb)
+
+
     except:
-        os.remove('daemon.txt')
+        print('Permission error, trying again...')
+        update_db()
+
+
+def main():
+    if not os.path.isfile('db.txt'):
+        f = open('db.txt', 'w+')
+        f.write(json.dumps([]))
+        f.close()
+    print('''
+    Close this daemon only from the command line using the -k option ''')
+    update_db()
 
 
 if __name__ == "__main__":

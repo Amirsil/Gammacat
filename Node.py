@@ -25,6 +25,9 @@ def get_ip():
     return ip
 
 
+IP = get_ip()
+
+
 @app.route('/', methods=['POST'])
 def home():
     jdb = ''
@@ -49,11 +52,11 @@ def home():
     for path in db:
         file = re.search('([^\\\]+$)', path).group()
         if '.' in file:
-            if filename in re.search(r'.*(?=\.)', file).group():
-                paths.append((path, get_ip()))
+            if filename.lower() in re.search(r'.*(?=\.)', file).group().lower():
+                paths.append((path, IP))
         else:
-            if filename in file:
-                paths.append((path, get_ip()))
+            if filename.lower() in file.lower():
+                paths.append((path, IP))
     return json.dumps(paths)
 
 
@@ -90,7 +93,7 @@ def main():
 Connecting to server...''')
     while True:
         try:
-            r = requests.post("http://%s:5555/handle_new_connections" % server_ip, data={"ip": get_ip()})
+            r = requests.post("http://%s:5555/handle_new_connections" % server_ip, data={"ip": IP})
             r = r
         except requests.exceptions.ConnectionError:
             continue
