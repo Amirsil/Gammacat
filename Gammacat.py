@@ -1,8 +1,22 @@
-from sys import argv
+from sys import argv, executable as python
 import webbrowser
 import subprocess
 import os
-import requests
+
+try:
+    import requests
+except ModuleNotFoundError:
+    subprocess.check_call([python, "-m", "pip", "install", "requests"])
+
+try:
+    import flask_cors
+except ModuleNotFoundError:
+    subprocess.check_call([python, "-m", "pip", "install", "flask_cors"])
+
+try:
+    import flask
+except ModuleNotFoundError:
+    subprocess.check_call([python, "-m", "pip", "install", "flask"])
 
 
 def main():
