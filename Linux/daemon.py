@@ -17,7 +17,9 @@ def update_db():
 
             paths = []
             try:
-                jdb = open(DB_NAME, 'r').read()
+                with open(DB_NAME, 'r') as f:
+                    jdb = f.read()
+                    f.close()
             except:
                 jdb = json.dumps([])
                 main()
@@ -26,20 +28,13 @@ def update_db():
             else:
                 db = []
 
-            for root, directories, filenames in os.walk('/'):
+            for root, directories, filenames in os.walk('/home'):
 
                 filenames = [f for f in filenames if not f[0] == '.']
                 directories[:] = [d for d in directories if not d[0] == '.' and "AppData" not in d]
 
                 if "AppData" in directories:
                     directories.remove("AppData")
-
-                if ord(getch()) == 27:
-                    time.sleep(0.1)
-                    _break = 1
-                    os.remove(DB_NAME)
-                    os.remove(SEMAPHORE_NAME)
-                    break
 
                 if _break:
                     break
@@ -56,30 +51,28 @@ def update_db():
 
                     db.append(path)
                     jdb = json.dumps(db)
-                    open(DB_NAME, 'w').write(jdb)
+                    with open(DB_NAME, 'w') as f:
+                        f.write(jdb)
+                        f.close()
 
             while len(db) != len(paths):
-                if ord(getch()) == 27:
-                    time.sleep(0.1)
-                    _break = 1
-                    os.remove(DB_NAME)
-                    os.remove(SEMAPHORE_NAME)
-                    break
-
                 if _break:
                     break
 
                 for path in db:
-                    if _break:
-                        break
-
                     if path not in paths:
                         db.remove(path)
                         jdb = json.dumps(db)
-                        open(DB_NAME, 'w').write(jdb)
+                        with open(DB_NAME, 'w') as f:
+                            f.write(jdb)
+                            f.close()
 
-    except PermissionError:
-        update_db()
+
+    except:
+        print('''
+Process Closed''')
+        os.remove(DB_NAME)
+        os.remove(SEMAPHORE_NAME)
 
 
 def main():
@@ -89,7 +82,7 @@ def main():
     open(SEMAPHORE_NAME, 'a').close()
 
     print('''
-Press Esc in order to close this process ''')
+Press Ctrl + C in order to close this process ''')
     update_db()
 
 

@@ -41,11 +41,13 @@ def handle_request():
                 r = requests.post("http://%s:5550" % ip, data={"filename": filename}, timeout=3)
                 r = r  # an operation on r must be done for some reason, else an exception occures.
                 if r.text:
-                    paths += json.loads(r.text.replace("\\", "\\\\").replace("/", "\\\\\\\\"))
+                    print(r.text)
+                    paths += json.loads(r.text)
             except:
                 ip_list.remove(ip)
         print('Connected storage nodes:\n%s' % '%s\n' % ''.join([ip for ip in ip_list]))
-        filenames = [re.search(r'([^\\]+$)', path).group() for path, ip in paths]
+        print(paths)
+        filenames = [re.search(r'([^\/]+$)', path).group() for path, ip in paths]
         return render_template('home.html', title='Home', paths=paths, filenames=filenames)
     return render_template('home.html', title='Home')
 

@@ -10,7 +10,7 @@ from flask_cors import CORS, cross_origin
 import urllib.parse
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '0xdeadbeef yes'
+app.config['SECRET_KEY'] = '0xdeadbeef'
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 cors = CORS(app, resources={r"/download_file": {"origins": "*"}})
@@ -50,13 +50,13 @@ def home():
 
     paths = []
     for path in db:
-        file = re.search('([^\\\]+$)', path).group()
-        if '.' in file:
-            if filename.lower() in re.search(r'.*(?=\.)', file).group().lower():
-                paths.append((path, IP))
-        else:
-            if filename.lower() in file.lower():
-                paths.append((path, IP))
+        file = re.search('([^\/]+$)', path).group()
+#        if '.' in file:
+#            if filename.lower() in re.search(r'.*(?=\.)', file).group().lower()#                paths.append((path, IP))
+        if filename == '.':
+            paths.append((path, IP))
+        elif filename.lower() in file.lower():
+            paths.append((path, IP))
     return json.dumps(paths)
 
 
