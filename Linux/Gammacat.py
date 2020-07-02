@@ -2,7 +2,6 @@ from sys import argv, executable as python
 import webbrowser
 import subprocess
 import os
-import daemon
 
 try:
     import requests
@@ -18,8 +17,12 @@ try:
     import flask
 except ModuleNotFoundError:
     subprocess.check_call([python, "-m", "pip", "install", "flask"])
+try:
+    import getch
+except ModuleNotFoundError:
+    subprocess.check_call([python, "-m", "pip", "install", "getch"])
 
-
+import daemon
 def main():
     if len(argv) > 1:
 
@@ -33,7 +36,7 @@ There is NO WARRANTY, to the extent permitted by law.
 
 Written by Torbjorn Granlund and Richard M. Stallman. ''')
         elif argv[1] in ['-d', '--daemon']:
-            if os.path.isfile('daemon.txt'):
+            if os.path.isfile('./daemon.txt'):
                 print('\nA daemon is already running in the background')
 
             else:
@@ -46,7 +49,7 @@ Written by Torbjorn Granlund and Richard M. Stallman. ''')
                 print('\nA server is already active')
 
             except requests.exceptions.ConnectionError:
-                subprocess.call("server.bat")
+                subprocess.call("./server.sh")
 
         elif len(argv) == 2:
 
@@ -83,7 +86,7 @@ Written by Torbjorn Granlund and Richard M. Stallman. ''')
                     print('\nA node is already active')
 
                 except requests.exceptions.ConnectionError:
-                    subprocess.call(["node.bat", argv[2]])
+                    subprocess.call(["./node.sh", argv[2]])
 
             elif argv[1] in ['-e', '--search']:
                 try:

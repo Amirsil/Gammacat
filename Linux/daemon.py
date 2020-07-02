@@ -2,7 +2,7 @@ import json
 import os
 import time
 import subprocess
-from msvcrt import kbhit, getch
+from getch import getch
 
 DB_NAME = 'db.txt'
 SEMAPHORE_NAME = 'daemon.txt'
@@ -34,7 +34,7 @@ def update_db():
                 if "AppData" in directories:
                     directories.remove("AppData")
 
-                if kbhit() and getch() == chr(27).encode():
+                if ord(getch()) == 27:
                     time.sleep(0.1)
                     _break = 1
                     os.remove(DB_NAME)
@@ -59,7 +59,7 @@ def update_db():
                     open(DB_NAME, 'w').write(jdb)
 
             while len(db) != len(paths):
-                if kbhit() and getch() == chr(27).encode():
+                if ord(getch()) == 27:
                     time.sleep(0.1)
                     _break = 1
                     os.remove(DB_NAME)
