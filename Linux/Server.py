@@ -42,7 +42,7 @@ def handle_request():
                 r = r  # an operation on r must be done for some reason, else an exception occures.
                 if r.text:
                     print(r.text)
-                    paths += json.loads(r.text)
+                    paths += json.loads(r.text.replace('\\', '/').replace('\\\\', '/'))
             except:
                 ip_list.remove(ip)
         print('Connected storage nodes:\n%s' % '%s\n' % ''.join([ip for ip in ip_list]))
