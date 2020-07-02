@@ -73,7 +73,7 @@ def update_db():
 Process Closed''')
         os.remove(DB_NAME)
         os.remove(SEMAPHORE_NAME)
-
+        exit()
 
 def main():
     with open(DB_NAME, 'w+') as f:

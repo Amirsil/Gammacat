@@ -1,1 +1,0 @@
-["/home/amir/Desktop/hey", "/home/amir/Desktop/lol", "/home/amir/Downloads/hi"]
