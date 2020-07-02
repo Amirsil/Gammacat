@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='home.css') }}">
+{% endblock %}
+
+{% block content %}
+<!--<form action="{{ url_for('handle_request') }}" method="post">-->
+<!--    <input type="text" name="filename">-->
+<!--    <input type="submit" class="button">-->
+<!--</form>-->
+<form class="form-style-7" action="{{ url_for('handle_request') }}" method="post">
+<ul>
+<li>
+    <input type="text" name="filename" maxlength="100" width="600">
+    <span>Enter Filename</span>
+</li>
+
+<li>
+    <input type="submit" value="Search for file">
+</li>
+</ul>
+</form>
+
+<ul>
+{% if paths %}
+        {% for path, ip in paths %}
+                <span class="square">
+                    <li>
+                            <a href="http://{{ip}}:5550/download_file?path={{path}}"> {{  filenames[paths.index([path, ip])] }} </a>
+                    </li>
+                </span>
+        {% endfor %}
+    {% endif %}
+</ul>
+
+<script type="text/javascript">
+//auto expand textarea
+function adjust_textarea(h) {
+    h.style.height = "20px";
+    h.style.height = (h.scrollHeight)+"px";
+}
+
+</script>
+{% endblock %}

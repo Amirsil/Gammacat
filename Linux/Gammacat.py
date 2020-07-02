@@ -2,6 +2,7 @@ from sys import argv, executable as python
 import webbrowser
 import subprocess
 import os
+import daemon
 
 try:
     import requests
@@ -37,16 +38,7 @@ Written by Torbjorn Granlund and Richard M. Stallman. ''')
 
             else:
                 print('\nStarting daemon...')
-                subprocess.call("daemon.bat")
-
-        elif argv[1] in ['-k', '--kill-daemon']:
-            if not os.path.isfile('daemon.txt'):
-                print('\nNo daemon is currently running')
-
-            else:
-                print('\nStopping daemon...')
-
-                subprocess.call("killdaemon.bat")
+                daemon.main()
 
         elif argv[1] in ['-s', '--server']:
             try:
@@ -116,7 +108,6 @@ Software sollution for file search in a network of computers all connected to 1 
         -c, --connect           connect to the server as a storage node
         -e, --search            connect to the main server from the browser to search files
         -d, --daemon            start a daemon that appends every file on your computer to a local database
-        -k, --kill-daemon       stop the daemon that appends files from your computer to a local database
         -cs, --close-server     close the gammacat web main server that is open on your host
         -cn, --close-node       close the storage node that is connected to the main server
         --version               output version information and exits ''')

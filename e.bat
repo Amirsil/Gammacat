@@ -1,1 +1,0 @@
-gammacat -e localhost

@@ -2,8 +2,10 @@ import json
 import os
 import time
 import subprocess
-DB_NAME = 'db.txt'
+from msvcrt import kbhit, getch
 
+DB_NAME = 'db.txt'
+SEMAPHORE_NAME = 'daemon.txt'
 
 def update_db():
     _break = 0
@@ -31,10 +33,12 @@ def update_db():
                 if "AppData" in directories:
                     directories.remove("AppData")
 
-                if os.path.isfile('killdaemon.txt'):
-                    subprocess.call("del-killdaemon.bat")
+                if kbhit() and getch() == chr(27).encode():
                     time.sleep(0.1)
                     _break = 1
+                    os.remove(DB_NAME)
+                    os.remove(SEMAPHORE_NAME)
+                    break
 
                 if _break:
                     break
@@ -53,12 +57,12 @@ def update_db():
                     jdb = json.dumps(db)
                     open(DB_NAME, 'w').write(jdb)
 
-
             while len(db) != len(paths):
-                if os.path.isfile('killdaemon.txt'):
-                    subprocess.call("del-killdaemon.bat")
+                if kbhit() and getch() == chr(27).encode():
                     time.sleep(0.1)
                     _break = 1
+                    os.remove(DB_NAME)
+                    os.remove(SEMAPHORE_NAME)
                     break
 
                 if _break:
@@ -73,19 +77,18 @@ def update_db():
                         jdb = json.dumps(db)
                         open(DB_NAME, 'w').write(jdb)
 
-
-    except:
-        print('Permission error, trying again...')
+    except PermissionError:
         update_db()
 
 
 def main():
-    if not os.path.isfile('db.txt'):
-        f = open('db.txt', 'w+')
+    with open(DB_NAME, 'w+') as f:
         f.write(json.dumps([]))
         f.close()
+    open(SEMAPHORE_NAME, 'a').close()
+
     print('''
-    Close this daemon only from the command line using the -k option ''')
+Press Esc in order to close this process ''')
     update_db()
 
 

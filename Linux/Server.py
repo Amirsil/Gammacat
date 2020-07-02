@@ -38,11 +38,11 @@ def handle_request():
         filename = req['filename']
         for ip in ip_list:
             try:
-                r = requests.post("http://%s:5550" % ip, data={"filename": filename})
+                r = requests.post("http://%s:5550" % ip, data={"filename": filename}, timeout=3)
                 r = r  # an operation on r must be done for some reason, else an exception occures.
                 if r.text:
                     paths += json.loads(r.text.replace("\\", "\\\\").replace("/", "\\\\\\\\"))
-            except requests.exceptions.ConnectionError:
+            except:
                 ip_list.remove(ip)
         print('Connected storage nodes:\n%s' % '%s\n' % ''.join([ip for ip in ip_list]))
         filenames = [re.search(r'([^\\]+$)', path).group() for path, ip in paths]
